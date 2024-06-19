@@ -25,7 +25,7 @@ function goTown()
     text.innerText = "You enter the store.";
     button1.onclick = buyHealth;
     button2.onclick = buyWeapon;
-    button3.onclick = goTown;
+    button3.onclick = goTown ;
 }
 
 function goStore()
