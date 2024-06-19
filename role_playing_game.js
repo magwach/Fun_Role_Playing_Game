@@ -16,13 +16,30 @@ const monsterStats = document.querySelector("#monsterStats");
 const monsterName = document.querySelector("#monsterName");
 const xpText = document.querySelector("#xpText");
 const monsterHealthText = document.querySelector("#monsterHealth");
+const locations = [];
+const cat =
+{
+    "Number of legs" : 4,
+      name : "Whiskers"
+};
+console.log(cat.name);
+//initializing the buttons
+button1.onclick = goStore;
+button2.onclick = goCave;
+button3.onclick = fightDragon;
+
+function update(location)
+{
+
+}
+
 
 function goTown()
 {
     button1.innerText = "Go to store";
     button2.innerText = "Go to cave";
     button3.innerText = "Fight dragon";
-    text.innerText = "You enter the store.";
+    text.innerText = "";
     button1.onclick =goStore;
     button2.onclick = goCave;
     button3.onclick = fightDragon;
@@ -58,7 +75,3 @@ function buyWeapon()
 
 }
 
-//initializing the buttons
-button1.onclick = goStore;
-button2.onclick = goCave;
-button3.onclick = fightDragon;
