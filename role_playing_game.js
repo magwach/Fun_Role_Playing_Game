@@ -47,6 +47,18 @@ const locations =
         "button text" : ["Go to town square", "Go to town square", "Go to town square"],
         "button functions" : [goTown, goTown, goTown],
         text :'The monster screams "Arg!" as it dies. You gain experience points and find gold.'
+    },
+    {
+        name : "lose",
+        "button text" : ["REPLAY?", "REPLAY?", "REPLAY?"],
+        "button functions" : [restart, restart, restart],
+        text :'You die. &#x2620;'
+    },
+    {
+        name : "win",
+        "button text" : ["REPLAY?", "REPLAY?", "REPLAY?"],
+        "button functions" : [restart, restart, restart],
+        text :"You defeat the dragon! YOU WIN THE GAME! &#x1F389;"
     }
 ];
 
@@ -92,7 +104,7 @@ const monsters =
     }
 ]
 
-//initializing the buttons
+
 button1.onclick = goStore;
 button2.onclick = goCave;
 button3.onclick = fightDragon;
@@ -106,7 +118,7 @@ function update(location)
     button1.onclick = location["button functions"][0];
     button2.onclick = location["button functions"][1];
     button3.onclick = location["button functions"][2];
-    text.innerText = location.text;
+    text.innerHTML = location.text;
 }
 
 
@@ -217,7 +229,7 @@ function attack()
 {
     text.innerText = "The "+ monsters[fighting].name +" attacks.";
     text.innerText += " You attack it with your "+ weapons[currentWeaponIndex].name +".";
-    health -= monsters[fighting].level;
+    health -= getMonsterAttackValue(monsters[fighting].level);
     monsterHealth -= weapons[currentWeaponIndex].power + Math.floor(Math.random() * xp) + 1;
     healthText.innerText = health;
     monsterHealthText.innerText = monsterHealth;
@@ -227,7 +239,14 @@ function attack()
     }
     else if (monsterHealth <= 0)
     {
-        defeatMonster();
+       if (fighting === 2)
+       {
+           winGame();
+       }
+        else
+       {
+           defeatMonster();
+       }
     }
 
 }
@@ -252,4 +271,22 @@ function lose()
 {
     update(locations[5]);
 
+}
+
+function restart()
+{
+    xp = 0;
+    health = 100;
+    gold = 50;
+    currentWeaponIndex = 0;
+    inventory = ["stick"];
+    goldText.innerText = gold;
+    healthText.innerText = health;
+    xpText.innerText = xp;
+    goTown();
+}
+
+function winGame()
+{
+    update(locations[6]);
 }
