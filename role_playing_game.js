@@ -1,6 +1,6 @@
 let xp = 0;
 let health = 100;
-let gold = 500;
+let gold = 50;
 let currentWeaponIndex = 0;
 let fighting;
 let monsterHealth;
@@ -79,7 +79,7 @@ function update(location)
 
 function goTown()
 {
-
+    update(locations[0]);
 }
 
 function goStore()
@@ -115,18 +115,27 @@ function buyHealth()
 
 function buyWeapon()
 {
-    if(gold >= 30)
+    if(currentWeaponIndex < weapons.length - 1)
     {
-        gold -= 30;
-        currentWeaponIndex++;
-        goldText.innerText = gold;
-        let newWeapon = weapons[currentWeaponIndex].name;
-        inventory.push(newWeapon);
-        text.innerText = "You now have a " + newWeapon+ "." + " In your inventory you have: " + inventory;
+        if(gold >= 30)
+        {
+            gold -= 30;
+            currentWeaponIndex++;
+            goldText.innerText = gold;
+            let newWeapon = weapons[currentWeaponIndex].name;
+            inventory.push(newWeapon);
+            text.innerText = "You now have a " + newWeapon+ "." + " In your inventory you have: " + inventory;
+        }
+        else
+        {
+            text.innerText = "You do not have enough gold to buy a weapon.";
+        }
     }
     else
     {
-        text.innerText = "You do not have enough gold to buy a weapon.";
+        text.innerText = "You already have the most powerful weapon!";
+        button2.innerText = "Sell weapon for 15 gold";
+        button2.onclick = sellWeapon;
     }
 }
 
@@ -137,5 +146,14 @@ function fightSlime()
 
 function fightBeast()
 {
+
+}
+function sellWeapon ()
+{
+    if(inventory.length > 1)
+    {
+        gold += 15;
+        goldText.innerText = gold;
+    }
 
 }
