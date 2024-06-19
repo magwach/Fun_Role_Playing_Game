@@ -1,6 +1,6 @@
 let xp = 0;
 let health = 100;
-let gold = 50;
+let gold = 250;
 let currentWeaponIndex = 0;
 let fighting;
 let monsterHealth;
@@ -35,9 +35,16 @@ const locations =
         "button text" : ["Fight slime", "Fight fanged beast", "Go to town square"],
         "button functions" : [fightSlime, fightBeast, goTown],
         text : "You enter the cave. You see some monsters."
+    },
+    {
+        name : "fight",
+        "button text" : ["Attack", "Dodge", "Run"],
+        "button functions" : [attack, dodge, goTown],
+        text : "You are fighting a monster."
     }
-
 ];
+
+
 
 const weapons =
 [
@@ -58,6 +65,25 @@ const weapons =
         power: 100
     }
 
+]
+
+const monsters =
+[
+    {
+        name:"slime",
+        level:2,
+        health:15
+    },
+    {
+        name:"fanged beast",
+        level:8,
+        health:60
+    },
+    {
+        name:"dragon",
+        level:20,
+        health:300
+    }
 ]
 
 //initializing the buttons
@@ -90,11 +116,6 @@ update(locations[1]);
 function goCave()
 {
     update(locations[2])
-}
-
-function fightDragon()
-{
-
 }
 
 function buyHealth()
@@ -139,21 +160,54 @@ function buyWeapon()
     }
 }
 
-function fightSlime()
-{
-
-}
-
-function fightBeast()
-{
-
-}
 function sellWeapon ()
 {
     if(inventory.length > 1)
     {
         gold += 15;
         goldText.innerText = gold;
+        let currentWeapon = inventory.shift();
+        currentWeaponIndex--;
+        text.innerText = "You sold a " + currentWeapon + ".";
+        text.innerText += " In your inventory you have: " + inventory;
     }
+    else
+    {
+        text.innerText = "Don't sell your only weapon!";
+    }
+}
+
+
+function fightDragon()
+{
+    fighting = 2;
+    goFight();
+}
+
+function fightSlime()
+{
+    fighting = 0;
+    goFight();
+
+}
+
+function fightBeast()
+{
+    fighting = 1;
+    goFight();
+}
+
+function goFight()
+{
+
+}
+
+function attack()
+{
+
+}
+
+function dodge()
+{
 
 }
