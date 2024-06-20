@@ -1,6 +1,6 @@
 let xp = 0;
-let health = 100;
-let gold = 50;
+let health = 100000;
+let gold = 500000;
 let currentWeapon = 0;
 let fighting;
 let monsterHealth;
@@ -96,14 +96,32 @@ button2.onclick = goCave;
 button3.onclick = fightDragon;
 
 function update(location) {
-    monsterStats.style.display = "none";
-    button1.innerText = location["button text"][0];
-    button2.innerText = location["button text"][1];
-    button3.innerText = location["button text"][2];
-    button1.onclick = location["button functions"][0];
-    button2.onclick = location["button functions"][1];
-    button3.onclick = location["button functions"][2];
-    text.innerHTML = location.text;
+    if (location === 6)
+    {
+        monsterStats.style.display = "none";
+        button1.innerText = location["button text"][0];
+        button2.innerText = location["button text"][1];
+        button3.innerText = location["button text"][2];
+        button1.onclick = location["button functions"][0];
+        button2.onclick = location["button functions"][1];
+        button3.onclick = location["button functions"][2];
+        text.innerHTML = location.text;
+        button2.style.display = 'inline-block';
+        button3.style.display = 'inline-block';
+    }
+    else
+    {
+        monsterStats.style.display = "none";
+        button1.innerText = location["button text"][0];
+        button2.innerText = location["button text"][1];
+        button3.innerText = location["button text"][2];
+        button1.onclick = location["button functions"][0];
+        button2.onclick = location["button functions"][1];
+        button3.onclick = location["button functions"][2];
+        text.innerHTML = location.text;
+    }
+
+
 }
 
 function goTown() {
@@ -234,10 +252,15 @@ function defeatMonster() {
 
 function lose() {
     update(locations[5]);
+    button2.style.display = 'none';
+    button3.style.display = 'none';
 }
 
 function winGame() {
     update(locations[6]);
+    button2.style.display = 'none';
+    button3.style.display = 'none';
+
 }
 
 function restart() {
@@ -249,6 +272,8 @@ function restart() {
     goldText.innerText = gold;
     healthText.innerText = health;
     xpText.innerText = xp;
+    button2.style.display = 'inline-block';
+    button3.style.display = 'inline-block';
     goTown();
 }
 
